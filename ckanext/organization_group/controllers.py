@@ -49,3 +49,9 @@ class GroupOwnershipController():
             return toolkit.abort(403, "bad request")    
 
         return toolkit.abort(403, "bad request")
+    
+    
+    def cancel_dataset_plugin_is_enabled():
+        if Helper.check_plugin_enabled('cancel_dataset_creation'):
+            return True
+        return False

@@ -8,6 +8,7 @@ from ckanext.organization_group.controllers import GroupOwnershipController
 class OrganizationGroupPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.ITemplateHelpers)
 
     # IConfigurer
 
@@ -34,3 +35,8 @@ class OrganizationGroupPlugin(plugins.SingletonPlugin):
             )
 
         return blueprint
+    
+    #ITemplateHelpers
+
+    def get_helpers(self):
+        return {'cancel_dataset_is_enabled': GroupOwnershipController.cancel_dataset_plugin_is_enabled}

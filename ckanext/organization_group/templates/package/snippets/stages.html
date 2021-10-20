@@ -5,11 +5,15 @@
 {% set s1 = stages[0] or 'active' %}
 {% set s2 = stages[1] or 'uncomplete' %}
 {% set s3 =  stages[2] or 'uncomplete' %}
-{% set s4 = stages[3] or 'uncomplete' %}
+{% if h.mediawiki_is_enabled() %}
+  {% set s4 = stages[3] or 'uncomplete' %}
+{% endif %}
 {% if s1 != 'uncomplete' %}{% set class = 'stage-1' %}{% endif %}
 {% if s2 != 'uncomplete' %}{% set class = 'stage-2' %}{% endif %}
 {% if s3 != 'uncomplete' %}{% set class = 'stage-3' %}{% endif %}
-{% if s4 != 'uncomplete' %}{% set class = 'stage-4' %}{% endif %}
+{% if h.mediawiki_is_enabled() %}
+  {% if s4 != 'uncomplete' %}{% set class = 'stage-4' %}{% endif %}
+{% endif %}
 
 <ol class="stages stage-4">
   <li class="first {{ s1 }}">
@@ -41,6 +45,7 @@
         {% endif %}
     </li>
 
+{% if h.mediawiki_is_enabled() %}
   <li class="last {{ s4 }}">
     {% if s4 != 'complete' %}
       <span class="highlight">{{ _('Equipment(s)') }}</span>
@@ -48,4 +53,5 @@
         <span class="highlight">{{ _('Equipment(s)') }}</span>
     {% endif %}
   </li>
+{% endif %}
 </ol>

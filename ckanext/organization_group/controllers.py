@@ -13,6 +13,8 @@ class GroupOwnershipController():
         group_list = Helper.get_groups_list()
         organizations = Helper.get_organizations_list()
         stages = ['complete', 'complete', 'active', 'uncomplete']
+        if not Helper.check_plugin_enabled('media_wiki'):
+            stages = ['complete', 'complete', 'active']
         return render_template('add_owner.html', pkg_dict=package, custom_stage=stages, group_list=group_list, org_list=organizations)
     
 
@@ -43,8 +45,10 @@ class GroupOwnershipController():
                     'capacity' : 'public'
                 }
                 toolkit.get_action('member_create')({}, member)
+                if Helper.check_plugin_enabled('media_wiki'):
+                    return redirect(h.url_for('media_wiki.machines_view', id=str(package_name) ,  _external=True))    
 
-                return redirect(h.url_for('media_wiki.machines_view', id=str(package_name) ,  _external=True))    
+                return redirect(h.url_for('dataset.read', id=str(package_name) ,  _external=True))    
 
             return toolkit.abort(403, "bad request")    
 
@@ -53,5 +57,10 @@ class GroupOwnershipController():
     
     def cancel_dataset_plugin_is_enabled():
         if Helper.check_plugin_enabled('cancel_dataset_creation'):
+            return True
+        return False
+    
+    def mediawiki_plugin_is_enabled():
+        if Helper.check_plugin_enabled('media_wiki'):
             return True
         return False

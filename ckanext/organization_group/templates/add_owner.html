@@ -29,13 +29,13 @@
     {{ input_object.select('owner_org', 
                 id='org_dropdown', 
                 label = "Owner Organization * ",                 
-                options=org_list, selected='0', classes=[], attrs={'class': 'org_dropdown'}, is_required=false) 
+                options=org_list, selected=h.get_user_org(), classes=[], attrs={'class': 'org_dropdown'}, is_required=false) 
     }} 
     <br>
     {{ input_object.select('owner_group', 
                 id='groups_dropdown', 
                 label = "Group * ",                 
-                options=group_list, selected='0', classes=[], attrs={'class': 'group_dropdown'}, is_required=false) 
+                options=group_list, selected=h.get_user_group(), classes=[], attrs={'class': 'group_dropdown'}, is_required=false) 
     }} 
     <br>
     <div class="form-actions">

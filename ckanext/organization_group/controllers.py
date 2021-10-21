@@ -60,7 +60,26 @@ class GroupOwnershipController():
             return True
         return False
     
+
     def mediawiki_plugin_is_enabled():
         if Helper.check_plugin_enabled('media_wiki'):
             return True
         return False
+
+
+    def get_user_org():
+        orgs = toolkit.get_action('organization_list')({}, {'all_fields':True, 'include_users': True})
+        for org in orgs:
+            for user in org['users']:
+                if toolkit.g.userobj.id == user['id']:
+                    return org['id']
+        return '0'
+    
+
+    def get_user_group():
+        groups = toolkit.get_action('group_list')({}, {'all_fields':True, 'include_users': True})
+        for g in groups:
+            for user in g['users']:
+                if toolkit.g.userobj.id == user['id']:
+                    return g['id']
+        return '0'

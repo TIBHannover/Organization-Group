@@ -40,5 +40,7 @@ class OrganizationGroupPlugin(plugins.SingletonPlugin):
 
     def get_helpers(self):
         return {'cancel_dataset_is_enabled': GroupOwnershipController.cancel_dataset_plugin_is_enabled,
-            'mediawiki_is_enabled': GroupOwnershipController.mediawiki_plugin_is_enabled
+            'mediawiki_is_enabled': GroupOwnershipController.mediawiki_plugin_is_enabled,
+            'get_user_org': GroupOwnershipController.get_user_org,
+            'get_user_group': GroupOwnershipController.get_user_group
         }

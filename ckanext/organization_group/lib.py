@@ -14,6 +14,8 @@ class Helper():
         temp['text'] = 'No group'
         group_list.append(temp)
         for group in groups:
+            if not Helper.check_access_edit_group(group['id']):
+                continue
             temp = {}
             temp['value'] = group['id']
             temp['text'] = group['name']
@@ -29,6 +31,8 @@ class Helper():
         temp['text'] = 'No organization'
         org_list.append(temp)
         for org in orgs:
+            if not Helper.check_access_add_dataset_to_org(org['id']):
+                continue
             temp = {}
             temp['value'] = org['id']
             temp['text'] = org['name']
@@ -42,6 +46,28 @@ class Helper():
         if plugin_name in plugins:
             return True
         return False
+    
+
+    def check_access_edit_group(group_id):
+        context = {'user': toolkit.g.user, 'auth_user_obj': toolkit.g.userobj}
+        data_dict = {'id':group_id}
+        try:
+            toolkit.check_access('group_update', context, data_dict)
+            return True
+
+        except toolkit.NotAuthorized:
+            return False
+
+
+    def check_access_add_dataset_to_org(org_id):
+        context = {'user': toolkit.g.user, 'auth_user_obj': toolkit.g.userobj}
+        data_dict = {'id':org_id}
+        try:
+            toolkit.check_access('organization_update', context, data_dict)
+            return True
+
+        except toolkit.NotAuthorized:
+            return False
 
 
 

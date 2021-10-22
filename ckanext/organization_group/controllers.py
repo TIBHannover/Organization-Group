@@ -46,7 +46,7 @@ class GroupOwnershipController():
                 }
                 toolkit.get_action('member_create')({}, member)
                 if Helper.check_plugin_enabled('media_wiki'):
-                    return redirect(h.url_for('media_wiki.machines_view', id=str(package_name) ,  _external=True))    
+                    return redirect(h.url_for('semantic_media_wiki.machines_view', id=str(package_name) ,  _external=True))    
 
                 return redirect(h.url_for('dataset.read', id=str(package_name) ,  _external=True))    
 
@@ -62,7 +62,7 @@ class GroupOwnershipController():
     
 
     def mediawiki_plugin_is_enabled():
-        if Helper.check_plugin_enabled('media_wiki'):
+        if Helper.check_plugin_enabled('semantic_media_wiki'):
             return True
         return False
 

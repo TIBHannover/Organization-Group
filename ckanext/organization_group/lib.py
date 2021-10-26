@@ -49,25 +49,23 @@ class Helper():
     
 
     def check_access_edit_group(group_id):
-        context = {'user': toolkit.g.user, 'auth_user_obj': toolkit.g.userobj}
-        data_dict = {'id':group_id}
-        try:
-            toolkit.check_access('group_update', context, data_dict)
-            return True
-
-        except toolkit.NotAuthorized:
-            return False
+        groups = toolkit.get_action('group_list')({}, {'all_fields':True, 'include_users': True})
+        for g in groups:
+            if g['id'] == group_id:
+                for user in g['users']:
+                    if toolkit.g.userobj.id == user['id']:
+                        return True
+        return False
 
 
     def check_access_add_dataset_to_org(org_id):
-        context = {'user': toolkit.g.user, 'auth_user_obj': toolkit.g.userobj}
-        data_dict = {'id':org_id}
-        try:
-            toolkit.check_access('organization_update', context, data_dict)
-            return True
-
-        except toolkit.NotAuthorized:
-            return False
+        orgs = toolkit.get_action('organization_list')({}, {'all_fields':True, 'include_users': True})
+        for org in orgs:
+            if org['id'] == org_id:
+                for user in org['users']:
+                    if toolkit.g.userobj.id == user['id']:
+                        return True
+        return False
 
 
 

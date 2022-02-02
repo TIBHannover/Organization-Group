@@ -12,9 +12,9 @@ class GroupOwnershipController():
         package = toolkit.get_action('package_show')({}, {'name_or_id': id})
         group_list = Helper.get_groups_list()
         organizations = Helper.get_organizations_list()
-        stages = ['complete', 'complete', 'active', 'uncomplete']
+        stages = ['complete', 'complete','complete', 'active', 'uncomplete']
         if not Helper.check_plugin_enabled('media_wiki'):
-            stages = ['complete', 'complete', 'active']
+            stages = ['complete', 'complete','complete', 'active']
         return render_template('add_owner.html', pkg_dict=package, custom_stage=stages, group_list=group_list, org_list=organizations)
     
 

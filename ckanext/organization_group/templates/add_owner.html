@@ -34,13 +34,22 @@
     <br>
     {% for group in group_list %}
       {% if group['value'] != '0' %}
-        {{ input_object.select('owner_group_' ~ loop.index, 
-                    id='groups_dropdown_' ~ loop.index, 
-                    label = "Group * ",                 
-                    options=group_list, selected=h.get_user_group(), classes=[], attrs={'class': 'group_dropdown'}, is_required=false) 
-        }} 
+        <div class="row group_dropdown_box" id={{'groups_dropdown_box_' ~ (loop.index - 1)}}>
+          <div class="col-sm-9">
+              <h4>{{_('Group * :')}}</h4>   
+              <select name={{'owner_group_' ~ (loop.index - 1)}} id={{'groups_dropdown_' ~ (loop.index - 1)}} class="group_dropdown">
+              {% for group in group_list %}           
+                  <option value={{group.value}}>
+                    {{group.text}} 
+                  </option>
+              {% endfor %}
+              <br>
+              </select>
+          </div>
+        </div>    
       {% endif %}
     {% endfor %}
+    <br>
     <button class="btn btn-success">{{_('+ Add a new Group')}}</button>
     <br><hr>
     <div class="form-actions">

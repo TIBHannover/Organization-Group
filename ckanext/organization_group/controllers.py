@@ -37,8 +37,7 @@ class GroupOwnershipController():
             groups = request.form.getlist('selected_groups')
             if org != '0' and org:
                 package['owner_org'] = org
-                toolkit.get_action('package_update')({}, package)
-                print(groups)
+                toolkit.get_action('package_update')({}, package)                
                 for group_id in groups:
                     member = {
                         'id' : group_id,

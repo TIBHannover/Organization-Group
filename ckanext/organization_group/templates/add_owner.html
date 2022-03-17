@@ -32,12 +32,17 @@
                 options=org_list, selected=h.get_user_org(), classes=[], attrs={'class': 'org_dropdown'}, is_required=false) 
     }} 
     <br>
-    {{ input_object.select('owner_group', 
-                id='groups_dropdown', 
-                label = "Group * ",                 
-                options=group_list, selected=h.get_user_group(), classes=[], attrs={'class': 'group_dropdown'}, is_required=false) 
-    }} 
-    <br>
+    {% for group in group_list %}
+      {% if group['value'] != '0' %}
+        {{ input_object.select('owner_group_' ~ loop.index, 
+                    id='groups_dropdown_' ~ loop.index, 
+                    label = "Group * ",                 
+                    options=group_list, selected=h.get_user_group(), classes=[], attrs={'class': 'group_dropdown'}, is_required=false) 
+        }} 
+      {% endif %}
+    {% endfor %}
+    <button class="btn btn-success">{{_('+ Add a new Group')}}</button>
+    <br><hr>
     <div class="form-actions">
         {% if h.cancel_dataset_is_enabled() %} 
           {% set dest_url = h.url_for('cancel_dataset_creation.cancel_dataset', package_id=pkg_dict.id, is_draft=0, _external=True) %}

@@ -32,34 +32,19 @@
                 options=org_list, selected=h.get_user_org(), classes=[], attrs={'class': 'org_dropdown'}, is_required=false) 
     }} 
     <br>
+
+    <h4>{{_('Group(s):')}}</h4>
     {% for group in group_list %}
         <label class="checkbox-container">
         {{group.text}}
           <input type="checkbox" 
-            class="{{'resource-checkbox-input' ~ counter}}  resource-box"
-            name={{'machine_resources_list' ~ (loop.index - 1)}} 
+            class="group-box"
+            name='selected_groups' 
             value={{group.value}}
             >
           <span class="checkmark"></span>
         </label>
-      
-      
-      
-      {# {% if group['value'] != '0' %}
-        <div class="row group_dropdown_box" id={{'groups_dropdown_box_' ~ (loop.index - 1)}}>
-          <div class="col-sm-9">
-              <h4>{{_('Group * :')}}</h4>   
-              <select name={{'owner_group_' ~ (loop.index - 1)}} id={{'groups_dropdown_' ~ (loop.index - 1)}} class="group_dropdown">
-              {% for group in group_list %}           
-                  <option value={{group.value}}>
-                    {{group.text}} 
-                  </option>
-              {% endfor %}
-              <br>
-              </select>
-          </div>
-        </div>    
-      {% endif %} #}
+
     {% endfor %}
     
     <div class="form-actions">

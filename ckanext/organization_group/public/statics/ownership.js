@@ -12,4 +12,21 @@ $(document).ready(function(){
             $('.org_dropdown').css('border', '2px solid red');
         }      
     });
+
+    /**
+     * Add another group
+     */
+    $('#add_another_group').click(function(){
+        let all_visible = false;
+        for(let i=1; i <= $('.group_dropdown_box').length; i++){
+          if ($('#groups_dropdown_box_' + i).is(':hidden')){
+            $('#groups_dropdown_box_' + i).fadeIn();
+            all_visible = true;
+            break;
+          }
+        }
+        if(!all_visible){
+          $(this).hide();
+        }
+      });
 });

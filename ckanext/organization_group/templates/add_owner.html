@@ -33,7 +33,19 @@
     }} 
     <br>
     {% for group in group_list %}
-      {% if group['value'] != '0' %}
+        <label class="checkbox-container">
+        {{group.text}}
+          <input type="checkbox" 
+            class="{{'resource-checkbox-input' ~ counter}}  resource-box"
+            name={{'machine_resources_list' ~ (loop.index - 1)}} 
+            value={{group.value}}
+            >
+          <span class="checkmark"></span>
+        </label>
+      
+      
+      
+      {# {% if group['value'] != '0' %}
         <div class="row group_dropdown_box" id={{'groups_dropdown_box_' ~ (loop.index - 1)}}>
           <div class="col-sm-9">
               <h4>{{_('Group * :')}}</h4>   
@@ -47,11 +59,9 @@
               </select>
           </div>
         </div>    
-      {% endif %}
+      {% endif %} #}
     {% endfor %}
-    <br>
-    <button class="btn btn-success">{{_('+ Add a new Group')}}</button>
-    <br><hr>
+    
     <div class="form-actions">
         {% if h.cancel_dataset_is_enabled() %} 
           {% set dest_url = h.url_for('cancel_dataset_creation.cancel_dataset', package_id=pkg_dict.id, is_draft=0, _external=True) %}

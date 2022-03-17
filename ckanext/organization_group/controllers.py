@@ -34,17 +34,20 @@ class GroupOwnershipController():
         action = request.form.get('save_btn')
         if action == 'finish_ownership':
             org = request.form.get('owner_org')
-            group = request.form.get('owner_group')
-            if org != '0' and group != '0' and group and org:
+            groups = request.form.getlist('selected_groups')
+            if org != '0' and org:
                 package['owner_org'] = org
                 toolkit.get_action('package_update')({}, package)
-                member = {
-                    'id' : group,
-                    'object': package['id'],
-                    'object_type': 'package',
-                    'capacity' : 'public'
-                }
-                toolkit.get_action('member_create')({}, member)
+                print(groups)
+                for group_id in groups:
+                    member = {
+                        'id' : group_id,
+                        'object': package['id'],
+                        'object_type': 'package',
+                        'capacity' : 'public'
+                    }                                            
+                    toolkit.get_action('member_create')({}, member)
+
                 if Helper.check_plugin_enabled('media_wiki'):
                     return redirect(h.url_for('semantic_media_wiki.machines_view', id=str(package_name) ,  _external=True))    
 

@@ -33,7 +33,7 @@
     }} 
     <br>
 
-    <h4>{{_('Group(s):')}}</h4>
+    <h4>{{_('The Group(s) that are linked to this dataset:')}}</h4>
     {% for group in group_list %}
         <label class="checkbox-container">
         {{group.text}}
@@ -44,9 +44,8 @@
             >
           <span class="checkmark"></span>
         </label>
-
     {% endfor %}
-    
+    <br><hr>
     <div class="form-actions">
         {% if h.cancel_dataset_is_enabled() %} 
           {% set dest_url = h.url_for('cancel_dataset_creation.cancel_dataset', package_id=pkg_dict.id, is_draft=0, _external=True) %}

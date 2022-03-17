@@ -10,8 +10,6 @@ class Helper():
         groups = toolkit.get_action('group_list')({}, {'all_fields':true})
         group_list = []
         temp = {}
-        temp['value'] = '0'
-        temp['text'] = 'No group'
         group_list.append(temp)
         for group in groups:
             if not Helper.check_access_edit_group(group['id']):

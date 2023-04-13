@@ -46,7 +46,7 @@ class GroupOwnershipController():
                     toolkit.get_action('member_create')({}, member)
 
                 if Helper.check_plugin_enabled('crc1153_specific_metadata'):
-                    return redirect(h.url_for('crc1153_specific_metadata.add_metadata', id=str(package_name) ,  _external=True))    
+                    return redirect(h.url_for('crc1153_specific_metadata.add_metadata', package_id=str(package_name) ,  _external=True))    
 
                 return redirect(h.url_for('dataset.read', id=str(package_name) ,  _external=True))    
 

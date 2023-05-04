@@ -46,7 +46,13 @@ class GroupOwnershipController():
                     toolkit.get_action('member_create')({}, member)
 
                 if Helper.check_plugin_enabled('crc1153_specific_metadata'):
-                    return redirect(h.url_for('crc1153_specific_metadata.add_metadata', package_id=str(package_name) ,  _external=True))    
+                    return redirect(h.url_for('crc1153_specific_metadata.add_metadata', package_id=str(package_name) ,  _external=True))
+                elif  Helper.check_plugin_enabled('resource_custom_metadata'):
+                    return redirect(h.url_for('resource_custom_metadata.add_metadata', package_id=str(package_name) ,  _external=True))
+                elif  Helper.check_plugin_enabled('sample_link'):
+                    return redirect(h.url_for('sample_link.add_samples_view', id=str(package_name) ,  _external=True))
+                elif  Helper.check_plugin_enabled('semantic_media_wiki'):
+                    return redirect(h.url_for('semantic_media_wiki.machines_view', id=str(package_name) ,  _external=True))
 
                 return redirect(h.url_for('dataset.read', id=str(package_name) ,  _external=True))    
 

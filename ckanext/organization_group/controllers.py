@@ -48,8 +48,8 @@ class GroupOwnershipController():
                 sfb = toolkit.config.get('ckanext.crc.project.id')
                 if sfb == "1153" and Helper.check_plugin_enabled('crc1153_specific_metadata'):
                     return redirect(h.url_for('crc1153_specific_metadata.add_metadata', package_id=str(package_name) ,  _external=True))
-                elif  Helper.check_plugin_enabled('semantic_media_wiki'):
-                    return redirect(h.url_for('semantic_media_wiki.machines_view', id=str(package_name) ,  _external=True))
+                elif  Helper.check_plugin_enabled('machine_link'):
+                    return redirect(h.url_for('machine_link.machines_view', id=str(package_name) ,  _external=True))
                 elif  sfb == "1153" and Helper.check_plugin_enabled('sample_link'):
                     return redirect(h.url_for('sample_link.add_samples_view', id=str(package_name) ,  _external=True))
 
@@ -67,7 +67,7 @@ class GroupOwnershipController():
     
 
     def mediawiki_plugin_is_enabled():
-        if Helper.check_plugin_enabled('semantic_media_wiki'):
+        if Helper.check_plugin_enabled('machine_link'):
             return True
         return False
 

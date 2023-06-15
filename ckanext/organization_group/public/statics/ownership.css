@@ -67,3 +67,8 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.fa.fa-spinner.fa-spin{
+  font-size: 14px;
+  display: none;
+}
